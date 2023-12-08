@@ -39,8 +39,17 @@ public class AddPlayers extends AppCompatActivity {
                 Intent intent = new Intent(AddPlayers.this, MainActivity.class);
                 intent.putExtra("playerOne", getPlayerOneName);
                 intent.putExtra("playerTwo", getPlayerTwoName);
+
+                // Play sound effect when start game button is clicked
                 final MediaPlayer startGameButtonMediaPlayer = MediaPlayer.create(AddPlayers.this, R.raw.notif);
                 startGameButtonMediaPlayer.start();
+                startGameButtonMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mediaPlayer) {
+                        startGameButtonMediaPlayer.release();
+                    }
+                });
+
                 startActivity(intent);
             }
         });
