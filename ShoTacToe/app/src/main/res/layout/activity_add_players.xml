@@ -69,12 +69,14 @@
 
             <Button
                 android:id="@+id/startGameButton"
-                style="@style/sfreg"
+                style="@style/sfbold"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/mutedblue"
                 android:text="Start Game"
+                android:textColor="@color/white"
+                android:textAppearance="@style/sfbold"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
         </LinearLayout>
