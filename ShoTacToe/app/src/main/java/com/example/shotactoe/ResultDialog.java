@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,5 +39,23 @@ public class ResultDialog extends Dialog {
                 dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        playSound(this.message);
+    }
+
+    // Play winner and draw sound effect
+    public void playSound(String msg) {
+        final MediaPlayer sound;
+        if (msg.contains("is a Winner!")) {
+            sound = MediaPlayer.create(this.mainActivity, R.raw.fanfare);
+            sound.start();
+        } else if (msg.contains("Match Draw")) {
+            sound = MediaPlayer.create(this.mainActivity, R.raw.draw);
+            sound.start();
+        }
     }
 }
