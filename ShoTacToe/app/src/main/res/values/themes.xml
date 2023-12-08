@@ -11,5 +11,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:textViewStyle">@style/sfreg</item>
+        <item name="android:editTextStyle">@style/sfultra</item>
+        <item name="android:buttonStyle">@style/sfreg</item>
     </style>
 </resources>
