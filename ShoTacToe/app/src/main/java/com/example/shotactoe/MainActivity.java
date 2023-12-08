@@ -1,5 +1,6 @@
 package com.example.shotactoe;
 
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -123,21 +124,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void performAction(ImageView  imageView, int selectedBoxPosition) {
+    private boolean isResultDialogVisible = false;
+
+    private void performAction(ImageView imageView, int selectedBoxPosition) {
+        if (isResultDialogVisible) {
+            // If a result dialog is already visible, do nothing
+            return;
+        }
+
         boxPositions[selectedBoxPosition] = playerTurn;
 
         if (playerTurn == 1) {
             imageView.setImageResource(R.drawable.ximage);
             playSound();
             if (checkResults()) {
-                ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerOneName.getText().toString()
-                        + " is a Winner!", MainActivity.this);
-                resultDialog.setCancelable(false);
-                resultDialog.show();
-            } else if(totalSelectedBoxes == 9) {
-                ResultDialog resultDialog = new ResultDialog(MainActivity.this, "Match Draw", MainActivity.this);
-                resultDialog.setCancelable(false);
-                resultDialog.show();
+                showResultDialog(binding.playerOneName.getText().toString() + " is a Winner!");
+            } else if (totalSelectedBoxes == 9) {
+                showResultDialog("Match Draw");
             } else {
                 changePlayerTurn(2);
                 totalSelectedBoxes++;
@@ -146,19 +149,27 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageResource(R.drawable.oimage);
             playSound();
             if (checkResults()) {
-                ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerTwoName.getText().toString()
-                        + " is a Winner!", MainActivity.this);
-                resultDialog.setCancelable(false);
-                resultDialog.show();
-            } else if(totalSelectedBoxes == 9) {
-                ResultDialog resultDialog = new ResultDialog(MainActivity.this, "Match Draw", MainActivity.this);
-                resultDialog.setCancelable(false);
-                resultDialog.show();
+                showResultDialog(binding.playerTwoName.getText().toString() + " is a Winner!");
+            } else if (totalSelectedBoxes == 9) {
+                showResultDialog("Match Draw");
             } else {
                 changePlayerTurn(1);
                 totalSelectedBoxes++;
             }
         }
+    }
+
+    private void showResultDialog(String message) {
+        ResultDialog resultDialog = new ResultDialog(MainActivity.this, message, MainActivity.this);
+        resultDialog.setCancelable(false);
+        resultDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                isResultDialogVisible = false;
+            }
+        });
+        resultDialog.show();
+        isResultDialogVisible = true;
     }
 
     // Sound effect when a box is tapped on
