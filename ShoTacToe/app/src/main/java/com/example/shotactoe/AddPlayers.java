@@ -33,12 +33,15 @@ public class AddPlayers extends AppCompatActivity {
 
                 if (getPlayerOneName.isEmpty() || getPlayerTwoName.isEmpty()) {
                     Toast.makeText(AddPlayers.this, "Please enter player name", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = new Intent(AddPlayers.this, MainActivity.class);
-                    intent.putExtra("playerOne", getPlayerOneName);
-                    intent.putExtra("playerTwo", getPlayerTwoName);
-                    startActivity(intent);
+                    return;
                 }
+
+                Intent intent = new Intent(AddPlayers.this, MainActivity.class);
+                intent.putExtra("playerOne", getPlayerOneName);
+                intent.putExtra("playerTwo", getPlayerTwoName);
+                final MediaPlayer startGameButtonMediaPlayer = MediaPlayer.create(AddPlayers.this, R.raw.notif);
+                startGameButtonMediaPlayer.start();
+                startActivity(intent);
             }
         });
     }
@@ -72,5 +75,6 @@ public class AddPlayers extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         stopBackgroundMusic();
+
     }
 }
