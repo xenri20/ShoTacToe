@@ -1,5 +1,6 @@
 package com.example.shotactoe;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -121,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (playerTurn == 1) {
             imageView.setImageResource(R.drawable.ximage);
+            playSound();
             if (checkResults()) {
                 ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerOneName.getText().toString()
                         + " is a Winner!", MainActivity.this);
@@ -136,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             imageView.setImageResource(R.drawable.oimage);
+            playSound();
             if (checkResults()) {
                 ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerTwoName.getText().toString()
                         + " is a Winner!", MainActivity.this);
@@ -150,6 +153,20 @@ public class MainActivity extends AppCompatActivity {
                 totalSelectedBoxes++;
             }
         }
+    }
+
+    // Sound effect when a box is tapped on
+    private void playSound() {
+        final MediaPlayer sound = MediaPlayer.create(this, R.raw.place);
+        sound.start();
+
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                // Release resources when the sound playback is complete
+                mp.release();
+            }
+        });
     }
 
     private void changePlayerTurn(int currentPlayerTurn) {
