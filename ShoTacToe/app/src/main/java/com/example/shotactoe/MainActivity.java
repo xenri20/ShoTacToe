@@ -20,12 +20,18 @@ public class MainActivity extends AppCompatActivity {
     private int playerTurn = 1;
     private int totalSelectedBoxes = 1;
 
+    public void resetPlayer(){
+        binding.playerOneLayout.setBackgroundResource(R.drawable.blackfilled_border);
+        binding.playerTwoLayout.setBackgroundResource(R.drawable.white_box);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        resetPlayer();
         combinationList.add(new int[] {0,1,2});
         combinationList.add(new int[] {3,4,5});
         combinationList.add(new int[] {6,7,8});
@@ -172,8 +178,7 @@ public class MainActivity extends AppCompatActivity {
     private void changePlayerTurn(int currentPlayerTurn) {
         playerTurn = currentPlayerTurn;
         if (playerTurn == 1) {
-            binding.playerOneLayout.setBackgroundResource(R.drawable.blackfilled_border);
-            binding.playerTwoLayout.setBackgroundResource(R.drawable.white_box);
+            resetPlayer();
         } else {
             binding.playerTwoLayout.setBackgroundResource(R.drawable.blackfilled_border);
             binding.playerOneLayout.setBackgroundResource(R.drawable.white_box);
@@ -205,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
         boxPositions = new int[] {0,0,0,0,0,0,0,0,0}; //9 zero
         playerTurn = 1;
         totalSelectedBoxes = 1;
-
+        resetPlayer();
         binding.image1.setImageResource(R.drawable.white_box);
         binding.image2.setImageResource(R.drawable.white_box);
         binding.image3.setImageResource(R.drawable.white_box);
