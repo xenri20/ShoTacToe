@@ -56,13 +56,8 @@ public class AddPlayers extends AppCompatActivity {
     }
 
     public void playBackgroundMusic(View v) {
-        if (mediaPlayer == null) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
-            // loop the song
-            mediaPlayer.setLooping(true);
-        } else if (!mediaPlayer.isPlaying()) {
-            // Reset and start the MediaPlayer if it's not playing
-            mediaPlayer.reset();
+        if (mediaPlayer == null || !mediaPlayer.isPlaying()) {
+            // Create a new MediaPlayer instance or reset the existing one
             mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
             mediaPlayer.setLooping(true);
         }
@@ -74,6 +69,7 @@ public class AddPlayers extends AppCompatActivity {
         if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
         }
+
         mediaPlayer.release();
         mediaPlayer = null;
     }
