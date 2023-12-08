@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/lavender_border"
+            android:background="@drawable/black_border"
             android:orientation="vertical"
             android:padding="24dp">
 
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/lavender_border"
+                android:background="@drawable/black_border"
                 android:drawableLeft="@drawable/ic_xicon"
                 android:drawablePadding="8dp"
                 android:hint="Enter player one name"
@@ -58,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/lavender_border"
+                android:background="@drawable/black_border"
                 android:drawableLeft="@drawable/ic_oicon"
                 android:drawablePadding="8dp"
                 android:hint="Enter player two name"
