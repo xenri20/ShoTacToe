@@ -8,4 +8,7 @@
     <color name="teal_200">#03DAC5</color>
     <color name="teal_700">#018786</color>
     <color name="lavender">#8692F7</color>
+    <color name="mutedgreen">#276968</color>
+    <color name="viborange">#FF8D00</color>
+    <color name="mutedblue">#4189B0</color>
 </resources>

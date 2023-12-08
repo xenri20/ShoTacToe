@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="sfreg" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/sf_pro_display_regular</item>
+    </style>
+    <style name="sfultra" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/sf_pro_display_ultralight</item>
+    </style>
+    <style name="publight" parent="@android:style/TextAppearance.Small">
+    <item name="android:fontFamily">@font/publicasans_light</item>
+    </style>
+    <style name="pubthin" parent="@android:style/TextAppearance.Small">
+    <item name="android:fontFamily">@font/publicasans_thinitalic</item>
+    </style>
+    <style name="sfbold" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/sf_pro_text_bold</item>
+    </style>
+    <style name="sfheavy" parent="@android:style/TextAppearance.Small">
+        <item name="android:fontFamily">@font/sf_pro_text_heavy</item>
+    </style>
+</resources>

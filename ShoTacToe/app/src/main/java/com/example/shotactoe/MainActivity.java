@@ -1,5 +1,7 @@
 package com.example.shotactoe;
 
+import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,12 +21,18 @@ public class MainActivity extends AppCompatActivity {
     private int playerTurn = 1;
     private int totalSelectedBoxes = 1;
 
+    public void resetPlayer(){
+        binding.playerOneLayout.setBackgroundResource(R.drawable.blackfilled_border);
+        binding.playerTwoLayout.setBackgroundResource(R.drawable.white_box);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        resetPlayer();
         combinationList.add(new int[] {0,1,2});
         combinationList.add(new int[] {3,4,5});
         combinationList.add(new int[] {6,7,8});
@@ -116,35 +124,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void performAction(ImageView  imageView, int selectedBoxPosition) {
+    private boolean isResultDialogVisible = false;
+
+    private void performAction(ImageView imageView, int selectedBoxPosition) {
+        if (isResultDialogVisible) {
+            // If a result dialog is already visible, do nothing
+            return;
+        }
+
         boxPositions[selectedBoxPosition] = playerTurn;
 
         if (playerTurn == 1) {
             imageView.setImageResource(R.drawable.ximage);
+            playSound();
             if (checkResults()) {
-                ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerOneName.getText().toString()
-                        + " is a Winner!", MainActivity.this);
-                resultDialog.setCancelable(false);
-                resultDialog.show();
-            } else if(totalSelectedBoxes == 9) {
-                ResultDialog resultDialog = new ResultDialog(MainActivity.this, "Match Draw", MainActivity.this);
-                resultDialog.setCancelable(false);
-                resultDialog.show();
+                showResultDialog(binding.playerOneName.getText().toString() + " is a Winner!");
+            } else if (totalSelectedBoxes == 9) {
+                showResultDialog("Match Draw");
             } else {
                 changePlayerTurn(2);
                 totalSelectedBoxes++;
             }
         } else {
             imageView.setImageResource(R.drawable.oimage);
+            playSound();
             if (checkResults()) {
-                ResultDialog resultDialog = new ResultDialog(MainActivity.this, binding.playerTwoName.getText().toString()
-                        + " is a Winner!", MainActivity.this);
-                resultDialog.setCancelable(false);
-                resultDialog.show();
-            } else if(totalSelectedBoxes == 9) {
-                ResultDialog resultDialog = new ResultDialog(MainActivity.this, "Match Draw", MainActivity.this);
-                resultDialog.setCancelable(false);
-                resultDialog.show();
+                showResultDialog(binding.playerTwoName.getText().toString() + " is a Winner!");
+            } else if (totalSelectedBoxes == 9) {
+                showResultDialog("Match Draw");
             } else {
                 changePlayerTurn(1);
                 totalSelectedBoxes++;
@@ -152,13 +159,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showResultDialog(String message) {
+        ResultDialog resultDialog = new ResultDialog(MainActivity.this, message, MainActivity.this);
+        resultDialog.setCancelable(false);
+        resultDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                isResultDialogVisible = false;
+            }
+        });
+        resultDialog.show();
+        isResultDialogVisible = true;
+    }
+
+    // Sound effect when a box is tapped on
+    private void playSound() {
+        final MediaPlayer sound = MediaPlayer.create(this, R.raw.place);
+        sound.start();
+
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                // Release resources when the sound playback is complete
+                mp.release();
+            }
+        });
+    }
+
     private void changePlayerTurn(int currentPlayerTurn) {
         playerTurn = currentPlayerTurn;
         if (playerTurn == 1) {
-            binding.playerOneLayout.setBackgroundResource(R.drawable.black_border);
-            binding.playerTwoLayout.setBackgroundResource(R.drawable.white_box);
+            resetPlayer();
         } else {
-            binding.playerTwoLayout.setBackgroundResource(R.drawable.black_border);
+            binding.playerTwoLayout.setBackgroundResource(R.drawable.blackfilled_border);
             binding.playerOneLayout.setBackgroundResource(R.drawable.white_box);
         }
     }
@@ -188,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         boxPositions = new int[] {0,0,0,0,0,0,0,0,0}; //9 zero
         playerTurn = 1;
         totalSelectedBoxes = 1;
-
+        resetPlayer();
         binding.image1.setImageResource(R.drawable.white_box);
         binding.image2.setImageResource(R.drawable.white_box);
         binding.image3.setImageResource(R.drawable.white_box);
