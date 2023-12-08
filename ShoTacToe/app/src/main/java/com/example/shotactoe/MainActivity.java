@@ -155,10 +155,10 @@ public class MainActivity extends AppCompatActivity {
     private void changePlayerTurn(int currentPlayerTurn) {
         playerTurn = currentPlayerTurn;
         if (playerTurn == 1) {
-            binding.playerOneLayout.setBackgroundResource(R.drawable.black_border);
+            binding.playerOneLayout.setBackgroundResource(R.drawable.blackfilled_border);
             binding.playerTwoLayout.setBackgroundResource(R.drawable.white_box);
         } else {
-            binding.playerTwoLayout.setBackgroundResource(R.drawable.black_border);
+            binding.playerTwoLayout.setBackgroundResource(R.drawable.blackfilled_border);
             binding.playerOneLayout.setBackgroundResource(R.drawable.white_box);
         }
     }
