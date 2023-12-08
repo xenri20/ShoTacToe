@@ -6,14 +6,18 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:background="@drawable/pagebkg"
-    android:gravity="center"
+    android:gravity="bottom"
     android:orientation="vertical"
     tools:context=".AddPlayers">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="150dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="20dp">
 
@@ -22,24 +26,24 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/lavender_border"
-            android:gravity="center"
             android:orientation="vertical"
             android:padding="24dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ENTER \n PLAYERS NAMES"
+                android:fontFamily="@font/sf_pro_text_heavy"
+                android:text="PLAYERS NAMES"
                 android:textAlignment="center"
-                android:textColor="@color/lavender"
-                android:textSize="36sp"
+                android:textColor="@color/mutedblue"
+                android:textSize="32sp"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/playerOne"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/lavender_border"
                 android:drawableLeft="@drawable/ic_xicon"
                 android:drawablePadding="8dp"
@@ -67,7 +71,9 @@
                 android:id="@+id/startGameButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/transimg"
+                android:backgroundTint="@color/mutedblue"
                 android:text="Start Game"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
