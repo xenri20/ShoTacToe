@@ -60,16 +60,22 @@ public class AddPlayers extends AppCompatActivity {
             mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
             // loop the song
             mediaPlayer.setLooping(true);
+        } else if (!mediaPlayer.isPlaying()) {
+            // Reset and start the MediaPlayer if it's not playing
+            mediaPlayer.reset();
+            mediaPlayer = MediaPlayer.create(this, R.raw.background_music);
+            mediaPlayer.setLooping(true);
         }
+
         mediaPlayer.start();
     }
 
     public void stopBackgroundMusic() {
-        if (mediaPlayer != null) {
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
             mediaPlayer.stop();
-            mediaPlayer.release();
-            mediaPlayer = null;
         }
+        mediaPlayer.release();
+        mediaPlayer = null;
     }
 
     // When the activity is resumed, if the background music is not playing, start playing the background music
